@@ -1,4 +1,6 @@
 import code.CrearBD;
+import code.InsertarNuevoProfesor;
+import code.ListarProfesores;
 import libs.Leer;
 
 public class Main {
@@ -19,8 +21,8 @@ public class Main {
                 case "0" -> {salir = true;}
                 case "1" -> {CrearBD.crearBD(); CrearBD.cargarAsignaturas(); CrearBD.cargarCentros(); CrearBD.cargarEspecialidad(); CrearBD.cargarProfesores(); CrearBD.cargarAsignaturasProfesores();}
                 case "2" -> {CrearBD.borrarBD();}
-                case "3" -> {}
-                case "4" -> {}
+                case "3" -> {ListarProfesores.consultarProfesores();}
+                case "4" -> {InsertarNuevoProfesor.insertarProf();}
                 default -> {System.out.println("La opcion seleccionada no existe");}
             }
         } while (!salir);

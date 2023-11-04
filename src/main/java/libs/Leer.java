@@ -105,6 +105,7 @@ public class Leer {
         return dato;
     }
 
+
     public static float pedirFloat(String texto) {
         // Variables para almacenar el dato y controlar errores
         float dato = 0;
@@ -137,5 +138,28 @@ public class Leer {
                 System.out.println("Introduce la fecha en el formato indicado (" + formato + ").");
             }
         }
+    }
+
+    public static char pedirChar(String texto) {
+        // Variable para almacenar el carácter
+        char caracter = 0;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try {
+                // Lee la entrada del usuario como una cadena
+                String input = pedirDato(texto, "^[a-zA-Z]$");
+                if (input.length() == 1) {
+                    caracter = input.charAt(0);
+                    entradaValida = true;
+                } else {
+                    mostrarEnPantalla("Entrada no válida. Introduce un único carácter.");
+                }
+            } catch (NumberFormatException e) {
+                mostrarEnPantalla("Entrada no válida. Introduce un único carácter.");
+            }
+        }
+
+        return caracter;
     }
 }
