@@ -100,17 +100,6 @@ public class InsertarNuevoProfesor {
                         validacion = false;
                         System.out.println("La fecha debe tener exactamente 10 caracteres (yyyy-MM-dd).");
                     }
-
-                    // También puedes agregar una validación adicional para el formato de la fecha
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    sdf.setLenient(false); // Esto hará que la fecha sea válida solo si cumple el formato
-
-                    try {
-                        sdf.parse(String.valueOf(FECHA_NAC));
-                    } catch (ParseException e) {
-                        validacion = false;
-                        System.out.println("El formato de la fecha es incorrecto.");
-                    }
                 } while (!validacion);
 
                 //comprobaciones del sexo del profesor
