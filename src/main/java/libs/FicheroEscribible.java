@@ -12,16 +12,6 @@ public class FicheroEscribible {
             if (Files.isWritable(p)) {
                 ficheroOK = true;
             }
-        }else {
-            try {
-                Files.createFile(p);
-                ficheroOK = true;
-                System.out.println("Archivo creado en la ruta: " + p);
-            } catch (IOException e) {
-                System.err.println("Error al crear el archivo: " + e.getMessage());
-            } catch (SecurityException e) {
-                System.err.println("No tiene permiso para crear el archivo: " + e.getMessage());
-            }
         }
         return ficheroOK;
     }
@@ -31,16 +21,6 @@ public class FicheroEscribible {
         if (Files.exists(p)) {
             if (Files.isReadable(p)) {
                 ficheroOK = true;
-            }
-        } else {
-            try {
-                Files.createFile(p);
-                ficheroOK = true;
-                System.out.println("Archivo creado en la ruta: " + p);
-            } catch (IOException e) {
-                System.err.println("Error al crear el archivo: " + e.getMessage());
-            } catch (SecurityException e) {
-                System.err.println("No tiene permiso para crear el archivo: " + e.getMessage());
             }
         }
         return ficheroOK;

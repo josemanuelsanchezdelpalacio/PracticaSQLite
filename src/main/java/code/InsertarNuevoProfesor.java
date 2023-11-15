@@ -81,10 +81,7 @@ public class InsertarNuevoProfesor {
                     ps = conexion.prepareStatement("SELECT JEFE_DEP FROM C1_PROFESORES WHERE JEFE_DEP = ?;");
                     ps.setInt(1, JEF_DEP);
                     rs = ps.executeQuery();
-                    if (rs.next()) {
-                        validacion = false;
-                        System.out.println("El codigo ya existe");
-                    }
+
                     if ((JEF_DEP + "").length() > 4) {
                         validacion = false;
                         System.out.println("El codigo tiene mas de 4 cifras");
@@ -101,16 +98,16 @@ public class InsertarNuevoProfesor {
                         System.out.println("La fecha debe tener exactamente 10 caracteres (yyyy-MM-dd).");
                     }
 
-                    /*// También puedes agregar una validación adicional para el formato de la fecha
+                    //validacion para el formato de la fecha
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    sdf.setLenient(false); // Esto hará que la fecha sea válida solo si cumple el formato
+                    sdf.setLenient(false);
 
                     try {
-                        sdf.parse(String.valueOf(FECHA_NAC));
+                        sdf.parse(FECHA_NAC);
                     } catch (ParseException e) {
                         validacion = false;
                         System.out.println("El formato de la fecha es incorrecto.");
-                    }*/
+                    }
                 } while (!validacion);
 
                 //comprobaciones del sexo del profesor
@@ -134,10 +131,7 @@ public class InsertarNuevoProfesor {
                     ps = conexion.prepareStatement("SELECT COD_CENTRO FROM C1_PROFESORES WHERE COD_CENTRO = ?;");
                     ps.setInt(1, COD_CENTRO);
                     rs = ps.executeQuery();
-                    if (rs.next()) {
-                        validacion = false;
-                        System.out.println("El codigo ya existe");
-                    }
+
                     if ((COD_CENTRO + "").length() > 4) {
                         validacion = false;
                         System.out.println("El codigo no puede tener mas de 4 numeros");
@@ -150,7 +144,7 @@ public class InsertarNuevoProfesor {
                 ps.setString(2, NOMBRE_APE);
                 ps.setString(3, ESPECIALIDAD);
                 ps.setInt(4, JEF_DEP);
-                ps.setString(5, String.valueOf(FECHA_NAC));
+                ps.setString(5, FECHA_NAC);
                 ps.setString(6, SEXO);
                 ps.setInt(7, COD_CENTRO);
                 ps.execute();

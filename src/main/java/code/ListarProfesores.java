@@ -10,13 +10,13 @@ import java.util.ArrayList;
 public class ListarProfesores {
 
     public static void consultarProfesores() {
-        String especialidad = "";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String ESPECIALIDAD = "";
+        PreparedStatement ps;
+        ResultSet rs;
         boolean validacion = true;
 
-        try (Connection con = ConexionSQLite.conectar()) {
-            try (Statement consultaEspecialidad = con.createStatement()) {
+        try (Connection conexion = ConexionSQLite.conectar()) {
+            try (Statement consultaEspecialidad = conexion.createStatement()) {
 
                 //listo las especialidades para mostrarlas
                 ResultSet datosEspecialidad = consultaEspecialidad.executeQuery("SELECT * FROM C1_ESPECIALIDAD");
@@ -27,11 +27,11 @@ public class ListarProfesores {
                 do {
                     validacion = true;
                     //pido al usuario una especialidad para buscarla a traves de una consulta
-                    especialidad = Leer.pedirCadena("Elije una especialidad para mostrar a los profesores con esa esp. :");
+                    ESPECIALIDAD = Leer.pedirCadena("Elije una especialidad para mostrar a los profesores con esa esp. :");
 
                     //comprueba la especialidad usando las tablas C1_PROFESORES Y C1_ESPECIALIDAD buscando la especialidad por posicion
-                    ps = con.prepareStatement("SELECT * FROM C1_PROFESORES p, C1_ESPECIALIDAD e WHERE p.ESPECIALIDAD=e.ESPECIALIDAD AND e.ESPECIALIDAD=?;");
-                    ps.setString(1, especialidad);
+                    ps = conexion.prepareStatement("SELECT * FROM C1_PROFESORES p, C1_ESPECIALIDAD e WHERE p.ESPECIALIDAD=e.ESPECIALIDAD AND e.ESPECIALIDAD=?;");
+                    ps.setString(1, ESPECIALIDAD);
                     rs = ps.executeQuery();
                     boolean especialidadEncontrada = false;
 
@@ -44,14 +44,13 @@ public class ListarProfesores {
                     // hago las validaciones si no existe y si lo que introduce el usuario no sea mayor a dos letras
                     if (!especialidadEncontrada) {
                         validacion = false;
-                        System.out.println("Esa especialidad no existe");
+                        System.out.println("Esa no tiene profesores asignados");
                     }
-                    if (especialidad.length() > 2) {
+                    if (ESPECIALIDAD.length() > 2) {
                         validacion = false;
                         System.out.println("Tiene que ser como máximo dos letras");
                     }
                 } while (!validacion);
-
             } catch (SQLSyntaxErrorException e) {
                 System.out.println("Error en la sintaxis de la sentencia SQL: " + e.getMessage());
             } catch (SQLIntegrityConstraintViolationException e) {
