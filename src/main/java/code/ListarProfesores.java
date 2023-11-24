@@ -21,7 +21,7 @@ public class ListarProfesores {
                 //listo las especialidades para mostrarlas
                 ResultSet datosEspecialidad = consultaEspecialidad.executeQuery("SELECT * FROM C1_ESPECIALIDAD");
                 while (datosEspecialidad.next()) {
-                    System.out.println(datosEspecialidad.getString("ESPECIALIDAD"));
+                    System.out.print(datosEspecialidad.getString("ESPECIALIDAD") + " - ");
                 }
 
                 do {
